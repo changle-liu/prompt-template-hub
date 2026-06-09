@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Prompt 模版大全</title>
+  <title>一键 Prompt</title>
   <link rel="stylesheet" href="popup.css">
 </head>
 
@@ -12,7 +12,7 @@
   <main class="app-shell">
     <header class="hero">
       <div>
-        <h1>Prompt 模版大全</h1>
+        <h1>一键 Prompt</h1>
       </div>
       <label class="search-box hero-search">
         <input id="search-input" type="search" placeholder="搜索模板（例如：翻译、代码、周报、面试）">
@@ -43,7 +43,8 @@
           <div class="header-actions">
             <button id="add-to-my-btn" class="secondary-button compact-button" type="button">添加到我的模板</button>
             <button id="edit-template-btn" class="primary-button compact-button hidden" type="button">编辑</button>
-            <button id="delete-template-btn" class="primary-button danger-button compact-button hidden" type="button">删除</button>
+            <button id="delete-template-btn" class="primary-button danger-button compact-button hidden"
+              type="button">删除</button>
           </div>
         </div>
 
@@ -104,7 +105,8 @@
     </section>
   </main>
 
-  <div id="delete-confirm-modal" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="delete-confirm-title">
+  <div id="delete-confirm-modal" class="modal-overlay hidden" role="dialog" aria-modal="true"
+    aria-labelledby="delete-confirm-title">
     <div class="modal-card">
       <h2 id="delete-confirm-title">删除模板？</h2>
       <p id="delete-confirm-message">删除后无法恢复。</p>
