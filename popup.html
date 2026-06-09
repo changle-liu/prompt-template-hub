@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prompt 模版大全</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+
+<body>
+  <main class="app-shell">
+    <header class="hero">
+      <div>
+        <h1>Prompt 模版大全</h1>
+      </div>
+      <label class="search-box hero-search">
+        <input id="search-input" type="search" placeholder="搜索模板（例如：翻译、代码、周报、面试）">
+      </label>
+      <span id="site-status" class="site-status">检测当前页面...</span>
+    </header>
+
+    <section class="toolbar" aria-label="模板分类">
+      <div id="category-list" class="category-list" role="list"></div>
+    </section>
+
+    <section class="content-grid">
+      <aside class="template-panel" aria-label="模板列表">
+        <div class="panel-title">
+          <h2>模板库</h2>
+          <button id="new-template-btn" class="small-button" type="button">新建模板</button>
+          <span id="template-count">0 个</span>
+        </div>
+        <div id="template-list" class="template-list"></div>
+      </aside>
+
+      <section class="builder-panel" aria-label="生成 Prompt">
+        <div class="selected-header">
+          <div>
+            <p id="selected-category" class="selected-category">请选择模板</p>
+            <h2 id="selected-title">从左侧选择一个 prompt 模板</h2>
+          </div>
+          <div class="header-actions">
+            <button id="add-to-my-btn" class="secondary-button compact-button" type="button">添加到我的模板</button>
+            <button id="edit-template-btn" class="primary-button compact-button hidden" type="button">编辑</button>
+            <button id="delete-template-btn" class="primary-button danger-button compact-button hidden" type="button">删除</button>
+          </div>
+        </div>
+
+        <p id="selected-description" class="template-description">
+          选择模板后，可直接复制原文，也可以填写变量生成完整 prompt。
+        </p>
+
+        <form id="template-editor" class="template-editor hidden">
+          <div class="field">
+            <label for="edit-title">模板标题 *</label>
+            <input id="edit-title" name="title" type="text" placeholder="例如：我的周报模板">
+          </div>
+          <div class="field">
+            <label for="edit-description">模板描述</label>
+            <textarea id="edit-description" name="description" placeholder="这个模板适合什么场景"></textarea>
+          </div>
+          <div class="editor-row">
+            <div class="field">
+              <label for="edit-category">分类</label>
+              <select id="edit-category" name="category"></select>
+            </div>
+            <div class="field">
+              <label for="edit-tags">标签</label>
+              <input id="edit-tags" name="tags" type="text" placeholder="用逗号分隔，例如：周报,汇报">
+            </div>
+          </div>
+          <div class="field">
+            <label>变量</label>
+            <textarea id="edit-variables" class="hidden" name="variables"></textarea>
+            <div id="variable-editor-list" class="variable-editor-list"></div>
+            <button id="add-variable-btn" class="small-button add-variable-btn" type="button">添加变量</button>
+          </div>
+          <div class="field">
+            <label for="edit-body">模板正文 *</label>
+            <textarea id="edit-body" name="body" placeholder="在正文中使用 {{变量名}} 或 {{变量名|默认值}}"></textarea>
+          </div>
+        </form>
+
+        <form id="variable-form" class="variable-form"></form>
+
+        <label class="preview-label" for="prompt-preview">生成结果</label>
+        <textarea id="prompt-preview" class="prompt-preview" spellcheck="false"
+          placeholder="生成后的 prompt 会显示在这里"></textarea>
+
+        <div class="action-row">
+          <button id="copy-btn" class="primary-button" type="button">复制 Prompt</button>
+          <button id="insert-btn" class="secondary-button" type="button">填入当前页面</button>
+        </div>
+
+        <div class="utility-row">
+          <button id="save-template-btn" class="text-button hidden" type="button">保存模板</button>
+          <button id="reset-btn" class="text-button" type="button">清空输入</button>
+          <button id="raw-copy-btn" class="text-button" type="button">复制模板原文</button>
+        </div>
+
+        <p id="toast" class="toast" role="status" aria-live="polite"></p>
+      </section>
+    </section>
+  </main>
+
+  <div id="delete-confirm-modal" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="delete-confirm-title">
+    <div class="modal-card">
+      <h2 id="delete-confirm-title">删除模板？</h2>
+      <p id="delete-confirm-message">删除后无法恢复。</p>
+      <div class="modal-actions">
+        <button id="cancel-delete-btn" class="secondary-button compact-button" type="button">取消</button>
+        <button id="confirm-delete-btn" class="primary-button compact-button" type="button">删除</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="data/templates.js"></script>
+  <script src="popup.js"></script>
+</body>
+
+</html>
